@@ -42,69 +42,73 @@
 		function displayForm1() {
 
 			var form = document.createElement("form");
+			var table = document.createElement("table");
+			var tbody = document.createElement("tbody");
+
 			form.setAttribute("action", "https://fe.it-academy.by/TestForm.php");
-			form.style.cssText = "width: 400px;";
 			document.body.appendChild(form);
+			form.appendChild(table);
+			table.appendChild(tbody);
 
 			for ( var i = 0; i < formDef1.length; i++) {
+				var tr = document.createElement("tr");
+				var td = document.createElement("td");
 				var input = document.createElement("input");
 				var label = document.createElement("label");
-				var br = document.createElement("br");
+
+				tbody.appendChild(tr);
+				tr.appendChild(td);
 				label.innerHTML = formDef1[i].label;
-				form.appendChild(label);
+				td.appendChild(label);
 				input.name = formDef1[i].name;
-				if (formDef1[i].kind == "combo") {
-					console.log("kind = " + formDef1[i].kind);
+				if (formDef1[i].kind == "combo") { //блок для блока селект
+					td = document.createElement("td");
+					tr.appendChild(td);
 					var select = document.createElement("select");
-					// var option = document.createElement("option");
 					var arrayOptions = formDef1[i].variants;
-					form.appendChild(select);
-					console.log("select = " + select);
+					td.appendChild(select);
 					for (var j = 0; j < arrayOptions.length; j++) {
 						var option = document.createElement("option");
 						option.text = arrayOptions[j].text;
 						option.value = arrayOptions[j].value;
-						console.log("option = " + option.text + " option value = " + option.value);
 						select.appendChild(option);
 					}
 
+				} else if (formDef1[i].kind == "radio") { //блок для радиокнопок
+					
+					var arrayOptions = formDef1[i].variants;
+					td = document.createElement("td");
+					tr.appendChild(td);
+					for (var k = 0; k < arrayOptions.length; k++) {
+						input = document.createElement("input");
+						label = document.createElement("label");
+						input.type = formDef1[i].kind;
+						input.value = arrayOptions[k].value;
+						label.innerHTML = arrayOptions[k].text;
+						td.appendChild(input);
+						td.appendChild(label);
+					}	
+				} else if (formDef1[i].kind == "check") {
+
+					td = document.createElement("td");
+					tr.appendChild(td);
+					input.type = "checkbox";
+					td.appendChild(input);
+
 				} else {
 					input.type = formDef1[i].kind;
-					input.style.cssText = "width: 50%; float: right;";
 					if (i == formDef1.length -1) {
-					form.appendChild(br);
-					form.removeChild(label);
+					td.removeChild(label);
 					input.value = formDef1[i].label.slice(0, formDef1[i].label.length-1);
 					input.name = formDef1[i].kind;
 					input.style.cssText = "width: 150px;";
-					form.appendChild(input);
+					td.appendChild(input);
 					} else {
-						form.appendChild(input);
-						form.appendChild(br);
+						td = document.createElement("td");
+						tr.appendChild(td);
+						td.appendChild(input);
 					}
 				}
-				// for ( var i = 0; i < formDef1.length; i++) {
-
-				// 	for (var key in formDef1[i]) {
-				// 		if (formDef1[i][key] == "combo") {
-				// 			console.log("formDef1[i][key] = " + formDef1[i][key] + " key - " + key);
-				// 			var select = document.createElement("select");
-				// 			var option = document.createElement("option");
-				// 			console.log("1=" + select);
-				// 		}
-				// 		console.log("2 = " + select);
-				// 			if (typeof(formDef1[i][key]) == "array") {
-				// 				console.log("formDef1[i][key] тип = " + typeof(formDef1[i][key]))
-				// 				for ( var j = 0; j < formDef1[i][key].length; j++) {
-				// 					option.value = formDef1[i][key][j].value;
-				// 					option.label = formDef1[i][key][j].text;
-				// 				}
-				// 			}
-				// 			// form.appendChild(select);
-				// 			// select.appendChild(option);
-				// 		// }
-				// 	}
-				// }
 			}
 
 		}
@@ -112,29 +116,37 @@
 		function displayForm2() {
 
 			var form = document.createElement("form");
+			var table = document.createElement("table");
+			var tbody = document.createElement("tbody");
+
+			form.style.cssText = "width: 600px;";
 			form.setAttribute("action", "https://fe.it-academy.by/TestForm.php");
-			form.style.cssText = "width: 400px;";
 			document.body.appendChild(form);
+			form.appendChild(table);
+			table.appendChild(tbody);
 
 			for ( var i = 0; i < formDef2.length; i++) {
+				var tr = document.createElement("tr");
+				var td = document.createElement("td");
 				var input = document.createElement("input");
 				var label = document.createElement("label");
-				var br = document.createElement("br");
+
+				tbody.appendChild(tr);
+				tr.appendChild(td);
 				label.innerHTML = formDef2[i].label;
-				form.appendChild(label);
+				td.appendChild(label);
 				input.type = formDef2[i].kind;
 				input.name = formDef2[i].name;
-				input.style.cssText = "width: 50%; float: right;";
 				if (i == formDef2.length -1) {
-					form.appendChild(br);
-					form.removeChild(label);
+					td.removeChild(label);
 					input.value = formDef2[i].label.slice(0, formDef2[i].label.length-1);
 					input.name = formDef2[i].kind;
 					input.style.cssText = "width: 150px;";
-					form.appendChild(input);
+					td.appendChild(input);
 				} else {
-					form.appendChild(input);
-					form.appendChild(br);
+					td = document.createElement("td");
+					tr.appendChild(td);
+					td.appendChild(input);
 				}
 			}
 
