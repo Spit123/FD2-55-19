@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>interview</title>
+</head>
+<body>
+	<script>
+		do {
+			do {
+				var surname = prompt("Введите Вашу фамилию.");
+				if (!!surname) {
+					surname = surname.replace(/[0-9]/g, '') /*Функция replace заменяет цифры на пустой символ. Флаг /g указан для удаления цифр, если они будут повторяться в строке.*/
+					surname = surname.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+					surname = surname.replace(/\s{2,}/g," ");
+			  		surname = surname.trim(); /*функция trim() удаляет только пробелы с обоих концов строки. Если не указаны параметры.*/
+				}
+				if (surname && surname.length < 2) {
+					alert("Фамилия не может состоять из 1 буквы или быть вовсе пустым!!!");
+				}
+			} while (surname && surname.length < 2)
+		} while (!surname)
+		
+		do {
+			do {
+				var YouName = prompt("Введите Ваше имя.");
+				if (!!YouName) {
+					YouName = YouName.replace(/[0-9]/g, '') 
+					YouName = YouName.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+					YouName = YouName.replace(/\s{2,}/g," ");
+			  		YouName = YouName.trim();
+				}
+				if (YouName && YouName.length < 2) {
+					alert("Имя не может состоять из 1 буквы или быть вовсе пустым!!!");
+				}
+			} while (YouName && YouName.length < 2)
+		} while (!YouName)
+		do {
+			do {
+				var patronymic = prompt("Введите Ваше отчество.");
+				if (!!patronymic) {
+					patronymic = patronymic.replace(/[0-9]/g, '') 
+					patronymic = patronymic.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+					patronymic = patronymic.replace(/\s{2,}/g," ");
+			  		patronymic = patronymic.trim(); 
+				}
+				if (patronymic && patronymic.length < 2) {
+					alert("Отчество не может состоять из 1 буквы или быть вовсе пустым!!!");
+				}
+			} while (patronymic && patronymic.length < 2)
+		} while (!patronymic)
+
+		var genderStr = confirm("Ваш пол - мужской?");
+		do {
+			var age = Math.abs(parseInt(prompt("Введите Ваш возраст.")));
+			if (isNaN(age)) {
+				alert("Возраст вводится только числом!");
+				continue;
+			} 
+			while (age > 100)
+			{
+				alert("Столько не живут. Введите реальный возраст!");
+				age = Math.abs(parseInt(prompt("Введите Ваш возраст.")));
+			}
+		} while (isNaN(age));
+		if (genderStr) {
+			var gender = "Мужской.";
+		} else {
+			gender = "Женский.";
+		}
+		if (age >= 60) {
+			var retiree = "да";
+		} else {
+		    retiree = "нет";
+		}
+		
+		console.log("Ваше ФИО: " + surname + " " + YouName + " " + patronymic + "\n" + "Ваш возраст в годах: " + age + "\n" + "Ваш возраст в днях: " + (age*365) + "\n" + "Через 5 лет Вам будет: " + (age+5) + "\n" + "Ваш пол: " + gender + "\n" + "Вы на пенсии: " + retiree);
+	</script>
+</body>
+</html>

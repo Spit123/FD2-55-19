@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>interview</title>
+</head>
+<body>
+	<script>
+			var surname = prompt("Введите Вашу фамилию.");
+			if (surname == null || typeof surname == "undefined") {
+				console.log("Фамилия не была введена!");
+				surname = "Фамилия не была введена!";
+			} else {
+				console.log("Введенная фамилия: " + surname);
+			}
+
+			var YouName = prompt("Введите Ваше имя.");
+			if (YouName == null || typeof YouName == "undefined") {
+				console.log("Имя не было введено!");
+				YouName = "Имя не было введено!";
+			} else {
+				console.log("Введенное имя: " + YouName);
+			}
+
+			var patronymic = prompt("Введите Ваше отчество.");
+			if (patronymic == null || typeof patronymic == "undefined") {
+				console.log("Отчество не было введено!");
+				patronymic = "Отчество не было введено!"; 
+			} else {
+				console.log("Введенное отчество: " + patronymic);
+			}
+
+		var genderStr = confirm("Ваш пол - мужской?");
+
+		var age = Math.abs(parseInt(prompt("Введите Ваш возраст.")));
+		if (isNaN(age)) {
+			console.log("Возраст вводится только числом!");
+		} else {
+			console.log("Введенный возраст: " + age);
+		}
+			
+		if (genderStr) {
+			var gender = "Мужской.";
+		} else {
+			gender = "Женский.";
+		}
+		if (age >= 60) {
+			var retiree = "да";
+		} else {
+		    retiree = "нет";
+		}
+		
+		console.log("Ваше ФИО: " + surname + " " + YouName + " " + patronymic + "\n" + "Ваш возраст в годах: " + age + "\n" + "Ваш возраст в днях: " + (age*365) + "\n" + "Через 5 лет Вам будет: " + (age+5) + "\n" + "Ваш пол: " + gender + "\n" + "Вы на пенсии: " + retiree);
+	</script>
+</body>
+</html>

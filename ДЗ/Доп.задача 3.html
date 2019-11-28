@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Задача 3</title>
+</head>
+<body>
+	<script>
+		"use strict"
+
+		for (var i = 1; i < 100; i++) {
+			if ( i%3 == 0 ) {
+				if (i%3 == 0 && i%5 == 0) {
+					console.log("трипять");
+				} else {
+					console.log("три");
+				}
+			} else if (i%5 == 0) {
+				if (i%3 == 0 && i%5 == 0) {
+					console.log("трипять");
+				} else {
+					console.log("пять");
+				}
+			} else {
+				console.log(i);
+			}
+		}
+	</script>
+</body>
+</html>

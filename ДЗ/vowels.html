@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vowels</title>
+</head>
+<body>
+	<script>
+
+		var vowels = "АаОоУуЫыЭэЯяЕеЁёЮюИи"; //гласные
+		var res = 0;
+		do {
+			do {
+				var str = prompt("Введите строку:"); //строка
+				if (!!str) {
+					str = str.replace(/[0-9]/g, '') /*Функция replace заменяет цифры на пустой символ. Флаг /g указан для удаления цифр, если они будут повторяться в строке.*/
+					str = str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+					str = str.replace(/\s{2,}/g," ");
+			  		str = str.trim(); /*функция trim() удаляет только пробелы с обоих концов строки. Если не указаны параметры.*/
+				}
+				if (str && str.length < 2) {
+					alert("Строка не может состоять из 1 буквы или быть вовсе пустым!!!");
+				}
+			} while (str && str.length < 2)
+		} while (!str)
+
+		for (var i = 0; i < str.length; i++) {
+
+		    if (vowels.search(str[i]) !== -1) 
+			{
+			  res++;
+			}
+		}
+
+		if (res === 1) {
+			console.log("В слове " + str + " содержится " + res + " гласная буква.");
+		} else if (res === 2 || res === 3 || res === 4) {
+			console.log("В слове " + str + " содержится " + res + " гласные буквы.");
+		} else {
+			console.log("В слове " + str + " содержится " + res + " гласных букв.");
+		}
+	</script>
+</body>
+</html>

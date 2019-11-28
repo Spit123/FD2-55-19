@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>treesum</title>
+</head>
+<body>
+	<script>
+		"use strict"
+
+		var a = [1, 2, [3, [6], 4, []], [3]];
+		var sum = 0;
+
+		function Summa(a) {
+			for (var i = 0; i < a.length; i++) {
+				if (!!a[i].length) {
+					var b = a[i];
+					Summa(b);
+				} else {
+					sum += +a[i];
+				}
+			}
+			return sum;
+		};
+
+		Summa(a);
+		console.log(sum);
+	</script>
+</body>
+</html>
