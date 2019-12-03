@@ -5,6 +5,8 @@
 	<title>DYN_FORM</title>
 </head>
 <body>
+	<button onclick="displayForm1()">Построить формы</button>
+	<button onclick="removeForm()">Убрать формы</button>
 	<script>
 		"use strict"
 		var formDef1=[
@@ -45,6 +47,7 @@
 			var table = document.createElement("table");
 			var tbody = document.createElement("tbody");
 
+			form.className = "form1";
 			form.setAttribute("action", "https://fe.it-academy.by/TestForm.php");
 			document.body.appendChild(form);
 			form.appendChild(table);
@@ -110,7 +113,7 @@
 					}
 				}
 			}
-
+			displayForm2();
 		}
 
 		function displayForm2() {
@@ -120,6 +123,7 @@
 			var tbody = document.createElement("tbody");
 
 			form.style.cssText = "width: 600px;";
+			form.className = "form2";
 			form.setAttribute("action", "https://fe.it-academy.by/TestForm.php");
 			document.body.appendChild(form);
 			form.appendChild(table);
@@ -149,7 +153,13 @@
 					td.appendChild(input);
 				}
 			}
+		}
 
+		function removeForm() {
+			var form1 = document.getElementsByClassName("form1");
+			var form2 = document.getElementsByClassName("form2");
+			document.body.removeChild(form1[0]);
+			document.body.removeChild(form2[0]);
 		}
 	</script>
 </body>

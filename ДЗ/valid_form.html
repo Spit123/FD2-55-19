@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>VALID_FORM</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			outline: none;
+		}
+	</style>
+</head>
+<body>
+	
+	<form action="https://fe.it-academy.by/TestForm.php">
+		<table>
+		<tbody>
+			<tr>
+				<td>
+					<label for="dev">Разработчики</label>
+				</td>
+				<td>
+					<input type="text" id="dev" name="developers" tabindex="1">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="sitename">Название сайта</label>
+				</td>
+				<td>
+					<input type="text" id="sitename" name="namesite" tabindex="2">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="siteurl">URL сайта</label>
+				</td>
+				<td>
+					<input type="text" name="urlsite" id="siteurl" tabindex="3">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="datestart">Дата запуска сайта</label>
+				</td>
+				<td>
+					<input type="text" name="startdata" id="datestart" tabindex="4">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="visitors">Посетителей в сутки</label>
+				</td>
+				<td>
+					<input type="text" name="visitorscount" id="visitors" tabindex="5">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="usermail">e-mail для связи</label>
+				</td>
+				<td>
+					<input type="text" name="useremail" id="usermail" tabindex="6">
+				</td>
+			</tr>
+			<tr>
+				<td><label for="heading">Рубрика каталога</label>
+				</td>
+				<td>
+					<select name="heading" id="heading" tabindex="7">
+						<option value="1">Здоровье</option>
+						<option value="2">Домашний уют</option>
+						<option value="3">Бытовая техника</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label >Размещение:</label>
+				</td>
+				<td>
+					<input type="radio" name="freeplacement" id="free" tabindex="8">
+					<label for="free">бесплатное</label>
+					<input type="radio" name="paidplacement" id="paid" tabindex="9">
+					<label for="paid">платное</label>
+					<input type="radio" name="VIP" id="vip" tabindex="10">
+					<label for="vip">VIP</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="allowcomments">Разрешить отзывы</label>
+				</td>
+				<td>
+					<input type="checkbox" name="allowcomment" id="allowcomments" tabindex="11">
+				</td>
+			</tr>
+			<tr>
+				<td><label for="description">Описание сайта</label></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<textarea name="description" id="description" tabindex="12"></textarea>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+		<input type="submit" name="publish" id="publish" value="Опубликовать">
+	</form>
+	<script>
+		
+		var dev = document.getElementById('dev');
+		var siteName = document.getElementById('sitename');
+		var urlSite = document.getElementById('siteurl');
+		var dateStart = document.getElementById('datestart');
+		var 
+
+	</script>
+</body>
+</html>

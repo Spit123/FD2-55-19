@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DYN_FORM</title>
+</head>
+<body>
+	<button onclick="buildForm(formDef1)">Построить форму 1</button>
+	<button onclick="buildForm(formDef2)">Построить форму 2</button>
+	<script>
+		"use strict"
+		var formDef1=[
+			{label:'Название сайта:',kind:'longtext',name:'sitename'},
+			{label:'URL сайта:',kind:'longtext',name:'siteurl'},
+			{label:'Посетителей в сутки:',kind:'number',name:'visitors'},
+			{label:'E-mail для связи:',kind:'shorttext',name:'email'},
+			{label:'Рубрика каталога:',kind:'combo',name:'division',
+			    variants:[
+			    	{text:'здоровье',value:1},
+			    	{text:'домашний уют',value:2},
+			    	{text:'бытовая техника',value:3}
+			    		 ]
+			},
+			{label:'Размещение:',kind:'radio',name:'payment',
+			    variants:[
+			    	{text:'бесплатное',value:1},
+			    	{text:'платное',value:2},
+			    	{text:'VIP',value:3}
+				    	 ]
+			},
+			{label:'Разрешить отзывы:',kind:'check',name:'votes'},
+			{label:'Описание сайта:',kind:'memo',name:'description'},
+			{label:'Опубликовать:',kind:'submit'},
+					];
+
+		var formDef2=[
+		  	{label:'Фамилия:',kind:'longtext',name:'lastname'},
+		  	{label:'Имя:',kind:'longtext',name:'firstname'},
+		  	{label:'Отчество:',kind:'longtext',name:'secondname'},
+		  	{label:'Возраст:',kind:'number',name:'age'},
+		  	{label:'Зарегистрироваться:',kind:'submit'},
+					];
+		var inputWidth = {
+			"shorttext" : "250px",
+			"longtext" : "600px",
+			"number" : "100px",
+			"memo" : "400px"
+		}
+		function buildForm(array) {
+			var form = document.createElement("form");
+			var table = document.createElement("table");
+			var tbody = document.createElement("tbody");
+			form.setAttribute("action", "https://fe.it-academy.by/TestForm.php");
+			document.body.appendChild(form);
+			form.appendChild(table);
+			table.appendChild(tbody);
+			array.forEach((formElement) => {
+				let tr = document.createElement("tr");
+				let td = document.createElement("td");
+				let td2 = document.createElement("td");
+				tbody.appendChild(tr);
+				let element;
+				let label = document.createElement("label");
+				label.innerHTML = formElement.label;
+				tr.appendChild(td);
+				switch (formElement.kind) {
+					case "shorttext":
+					case "longtext":
+					case "number":
+						element = document.createElement("input");
+						element.setAttribute("type", formElement.kind);
+						element.setAttribute("name", formElement.name);
+						element.style.width = inputWidth[formElement.kind];
+						break;
+					case "combo":
+						element = document.createElement("select");
+						var arrayOptions = formElement.variants;
+						tr.appendChild(td);
+						td.appendChild(element);
+						for (var i = 0; i < arrayOptions.length; i++) {
+							var option = document.createElement("option");
+							option.text = arrayOptions[i].text;
+							option.value = arrayOptions[i].value;
+							element.appendChild(option);
+						}
+						break;
+					case "radio":
+						var arrayOptions = formElement.variants;
+						for (var i = 0; i < arrayOptions.length; i++) {
+							element = document.createElement("input");
+							let labelRadio = document.createElement("label");
+							labelRadio.innerHTML = arrayOptions[i].text;
+							element.setAttribute("type", formElement.kind);
+							td2.appendChild(element);
+							td2.appendChild(labelRadio);
+						}	
+						break;
+					case "check":
+						element = document.createElement("input");
+						element.setAttribute("type", "checkbox");
+						break;
+					case "memo":
+						element = document.createElement("textarea");
+						element.setAttribute("height", "150px");
+						break;
+					case "submit":
+						element = document.createElement("input");
+						element.setAttribute("type", "submit");
+						element.value = formElement.label.slice(0, formElement.label.length-1);
+						break;
+				}
+				if (formElement.kind !== "submit") {
+					td.appendChild(label);
+					tr.appendChild(td2);
+					if (!td2.innerHTML) {
+						td2.appendChild(element);
+					}
+				} else {
+					tr.appendChild(td);
+					td.appendChild(element);	
+				}
+			})
+		}
+	</script>
+</body>
+</html>
