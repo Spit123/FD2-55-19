@@ -1,0 +1,38 @@
+<html>
+	<head>
+
+	</head>
+	<body>
+		<form id="form" action="index.php">
+			<input type="text" class="validate">
+			<input type="text" class="validate">
+			<input type="text">
+			<input type="Submit" value="Submit" id="submit" />
+		</form>
+
+		<input type="button" id="button" value="Button" />
+		<script>
+			form.getElementsByClassName('validate');
+			var fields = form.querySelectorAll('.validate');
+
+			for(let i=0; i<fields.length; i++) {
+				fields[i].addEventListener('blur', vlaidateField);
+			}
+
+
+			function vlaidateField(event) {
+				
+			}
+
+			document.getElementById("form").addEventListener("submit", (e) => {
+				console.log("Submited");
+				e.preventDefault();
+			});
+
+			document.getElementById("button").addEventListener("click", () => {
+				console.log("Button clicked");
+				form.submit();
+			});
+		</script>
+	</body>
+</html>

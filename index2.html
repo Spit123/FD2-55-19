@@ -1,0 +1,30 @@
+<html>
+	<head>
+
+	</head>
+	<body>asdasdasdasd
+		<div style="position: fixed; left: 0; right: 0; top: 0; bottom: 0; background: rgba(0,0,0,0.8);">
+			<div style="height: 200px; width: 400px; background: #fff; position: absolute; top: 50%; left: 50%; margin-left: -200px; margin-top: -100px;">
+				<a href="https://tut.by">tut.by</a>
+			</div>
+		</div>
+		<script>
+			document.addEventListener("keypress", function(e) {
+				console.log(e);
+				if (e.keyCode === 32){
+					document.getElementsByTagName("div")[0].style.display = "none";
+				}
+			});
+			document.getElementsByTagName("div")[0].addEventListener("keypress", function(e) {
+				this.style.display = "none";
+			});
+			document.getElementsByTagName("div")[1].addEventListener("click", function(e) {
+				e.stopPropagation();
+			});
+			document.getElementsByTagName("a")[0].addEventListener("click", function(e) {
+				console.log("A");
+				e.preventDefault();
+			});
+		</script>
+	</body>
+</html>
