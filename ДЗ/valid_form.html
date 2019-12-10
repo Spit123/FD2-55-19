@@ -10,11 +10,14 @@
 			box-sizing: border-box;
 			outline: none;
 		}
+		.validate {
+			width: 220px;
+		}
 	</style>
 </head>
 <body>
 	
-	<form action="https://fe.it-academy.by/TestForm.php">
+	<form action="https://fe.it-academy.by/TestForm.php" id="form1">
 		<table>
 		<tbody>
 			<tr>
@@ -22,48 +25,54 @@
 					<label for="dev">Разработчики</label>
 				</td>
 				<td>
-					<input type="text" id="dev" name="developers" tabindex="1">
+					<input type="text" id="dev" name="developers" tabindex="1" class="validate">
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>
 					<label for="sitename">Название сайта</label>
 				</td>
 				<td>
-					<input type="text" id="sitename" name="namesite" tabindex="2">
+					<input type="text" id="sitename" name="namesite" tabindex="2" class="validate">
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>
 					<label for="siteurl">URL сайта</label>
 				</td>
 				<td>
-					<input type="text" name="urlsite" id="siteurl" tabindex="3">
+					<input type="text" name="urlsite" id="siteurl" tabindex="3" class="validate">
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>
 					<label for="datestart">Дата запуска сайта</label>
 				</td>
 				<td>
-					<input type="text" name="startdata" id="datestart" tabindex="4">
+					<input type="text" name="startdata" id="datestart" tabindex="4" class="validate">
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>
 					<label for="visitors">Посетителей в сутки</label>
 				</td>
 				<td>
-					<input type="text" name="visitorscount" id="visitors" tabindex="5">
+					<input type="text" name="visitorscount" id="visitors" tabindex="5" class="validate">
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>
 					<label for="usermail">e-mail для связи</label>
 				</td>
 				<td>
-					<input type="text" name="useremail" id="usermail" tabindex="6">
+					<input type="text" name="useremail" id="usermail" tabindex="6" class="validate">
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td><label for="heading">Рубрика каталога</label>
@@ -75,19 +84,21 @@
 						<option value="3">Бытовая техника</option>
 					</select>
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>
 					<label >Размещение:</label>
 				</td>
 				<td>
-					<input type="radio" name="freeplacement" id="free" tabindex="8">
+					<input type="radio" name="placement" id="free" tabindex="8">
 					<label for="free">бесплатное</label>
-					<input type="radio" name="paidplacement" id="paid" tabindex="9">
+					<input type="radio" name="placement" id="paid" tabindex="9">
 					<label for="paid">платное</label>
-					<input type="radio" name="VIP" id="vip" tabindex="10">
+					<input type="radio" name="placement" id="vip" tabindex="10">
 					<label for="vip">VIP</label>
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>
@@ -96,9 +107,11 @@
 				<td>
 					<input type="checkbox" name="allowcomment" id="allowcomments" tabindex="11">
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td><label for="description">Описание сайта</label></td>
+				<td></td>
 				<td></td>
 			</tr>
 			<tr>
@@ -111,15 +124,66 @@
 		<input type="submit" name="publish" id="publish" value="Опубликовать">
 	</form>
 	<script>
-		
-		var dev = document.getElementById('dev');
-		var siteName = document.getElementById('sitename');
-		var urlSite = document.getElementById('siteurl');
-		var dateStart = document.getElementById('datestart');
-		var visitors = document.getElementById("visitors");
-		var userEmail = document.getElementById("usermail");
-		
+		"use strict"
 
+		var form = document.getElementById("form1");
+		var fields = form.elements;
+		var td = document.getElementsByTagName("td");
+		var inputs = document.querySelectorAll(".validate");
+
+		form.addEventListener("submit", validateForm);
+		//почитать в гугле как обрабатывать потерю фокуса на инпуте только после того как он был сфокусирован, а не с самого старта страницы, чтобы поля сразу не окрашивались
+		for(let key in inputs) {
+			if (inputs[key].type == "text") {
+					inputs[key].addEventListener("blur", validateElement);
+				}
+			}
+
+		function validateForm(e) {
+			try {
+				for (let key in fields) {
+					switch (fields[key].type) {
+						case "text":
+							if (!fields[key].value) {
+								fields[key].focus();
+								fields[key].style.border = "2px solid red";
+								console.log("Поле " + fields[key].name + " не заполнено!");
+								e.preventDefault();
+							}
+							break;
+						case "radio":
+							if (!fields.placement.value) {
+								fields.placement[0].focus();
+								td[22].style.border = "2px solid red";
+								document.getElementById('free').scrollIntoView();
+								console.log("не выбран хотя бы один из " + fields.placement.length + " вариантов!");
+								e.preventDefault();
+							}
+							break;
+						case "checkbox":
+							if (!fields[key].checked) {
+								console.log("Вы не разрешили отзывы!");
+								e.preventDefault();
+							}
+							break;
+					}
+				}
+			} catch(e) {
+				e.preventDefault();
+				console.log(e);
+			}
+		}
+		
+		function validateElement(element) {
+				if (!this.value) {
+					this.style.border = "2px solid red";
+					let tr = this.parentNode;
+					this.parentNode.nextElementSibling.style.width = "200px";
+					this.parentNode.nextElementSibling.innerHTML = "Поле не заполнено!";
+				} else {
+					return;
+				}
+		}
 	</script>
 </body>
 </html>
