@@ -13,6 +13,59 @@
 	</style>
 </head>
 <body>
-	
+	<img src="https://js.cx/clipart/ball.svg" alt="ball" id="ball1">
+	<img src="https://js.cx/clipart/ball.svg" width="70" alt="ball" id="ball2">
+	<img src="https://js.cx/clipart/ball.svg" width="100" alt="ball" id="ball3">
+	<img src="https://js.cx/clipart/ball.svg" width="130" alt="ball" id="ball4">
+	<img src="https://js.cx/clipart/ball.svg" width="160" alt="ball" id="ball5">
+	<script>
+		"use strict"
+
+		var ball = null;
+
+		document.body.addEventListener("dragstart", DragStart);
+
+		function DragStart(e) {
+
+			e.preventDefault();
+			ball = e.target;
+
+			var coords = getCoords(ball);
+			var shiftX = e.pageX - coords.left;
+			var shiftY = e.pageY - coords.top;
+			var oldZindex = ball.style.zIndex;
+
+			ball.style.position = 'absolute';
+			ball.style.zIndex = 1000; 
+
+			function moveAt(e) {
+				ball.style.left = e.pageX - shiftX + 'px';
+				ball.style.top = e.pageY - shiftY + 'px';
+			}
+
+			moveAt(e);
+
+			document.onmousemove = function(e) {
+				moveAt(e);
+			}
+
+			ball.onmouseup = function() {	
+				ball.style.zIndex = oldZindex;
+				document.onmousemove = null;
+				ball.onmousemove = null;
+				ball.onmouseup = null;
+				ball = null;
+				}
+		}
+
+		function getCoords(elem) {
+
+			  	var box = elem.getBoundingClientRect();
+			 	return {
+			    	top: box.top + pageYOffset,
+			    	left: box.left + pageXOffset
+			 	}
+			}
+	</script>
 </body>
 </html>

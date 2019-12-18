@@ -132,7 +132,7 @@
 		var inputs = document.querySelectorAll(".validate");
 
 		form.addEventListener("submit", validateForm);
-		//почитать в гугле как обрабатывать потерю фокуса на инпуте только после того как он был сфокусирован, а не с самого старта страницы, чтобы поля сразу не окрашивались
+
 		for(let key in inputs) {
 			if (inputs[key].type == "text") {
 					inputs[key].addEventListener("blur", validateElement);
@@ -177,10 +177,12 @@
 		function validateElement(element) {
 				if (!this.value) {
 					this.style.border = "2px solid red";
-					let tr = this.parentNode;
+					// let tr = this.parentNode;
 					this.parentNode.nextElementSibling.style.width = "200px";
 					this.parentNode.nextElementSibling.innerHTML = "Поле не заполнено!";
 				} else {
+					this.style.border = "2px inset";
+					this.parentNode.nextElementSibling.innerHTML = "";
 					return;
 				}
 		}

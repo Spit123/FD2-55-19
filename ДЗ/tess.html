@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var th = [
+			  ['1', 'Одна тысяча'],
+			  ['2', 'Две тысячи'],
+			  ['3', 'Три тысячи'],
+			  ['4', 'Четыре тысячи'],
+			  ['5', 'Пять тысяч'],
+			  ['6', 'Шесть тысяч'],
+			  ['7', 'Семь тысяч'],
+			  ['8', 'Восемь тысяч'],
+			  ['9', 'Девять тысяч'],
+			];
+			var ue = prompt('Введите число от 1 до 9999');
+			while(!!ue){
+				let count = false;
+				for (let i = 0; i < th.length; i++) {
+					if (i == ue) {
+						alert(th[ue-1][1]);
+						count = true;
+						break;
+					} else {
+						continue;
+					}
+			}
+			if (count) {
+				break;
+			}
+		}
+	</script>
+</body>
+</html>
