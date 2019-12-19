@@ -10,30 +10,83 @@
 			box-sizing: border-box;
 			outline: none;
 		}
+		.clock {
+			width: 600px;
+			height: 600px;
+			margin: 100px auto;
+		}
 		.clock-face {
-			border-radius: 50%;
-			background-color: rgb(252, 202, 102);
-			width: 500px;
-			height: 500px;
+			width: 600px;
+			height: 600px;
+			background: url(IMages/clock-face600.png);
+			position: relative;
 		}
-		.number {
-			border-radius: 50%;
-			background-color: rgb(72, 179, 130);
-			width: 50px;
-			height: 50px;
+		.hour, .minutes, .seconds {
+			position: absolute;
+			width: 30px;
+			height: 600px;
+			top: 0px;
+			left: 285px;
 		}
-		.hour-line {
-
+		.hour {
+			background: url(IMages/hour.png);
+			z-index: 1;
 		}
-		.minutes-line {
-
+		.minutes {
+			background: url(IMages/minutes.png);
+			z-index: 2;
 		}
-		.seconds-line {
-			
+		.seconds {
+			background: url(IMages/seconds.png);
+			z-index: 3;
+		}
+		.time {
+			width: 130px;
+			height: 40px;
+			position: absolute;
+			top: 100px;
+			left: 50%;
+			transform: translate(-50%, 0);
+			font-size: 26pt;
 		}
 	</style>
 </head>
 <body>
-	
+	<div class="clock">
+		<div class="clock-face">
+			<div class="time"></div>
+			<div class="hour"></div>
+			<div class="minutes"></div>
+			<div class="seconds"></div>
+		</div>
+	</div>
+	<script>
+		"use strict"
+
+		setInterval( function() {
+ 			var seconds = new Date().getSeconds();
+ 			var secondsDegree = seconds*6;
+ 			var secondsRotate = "rotate(" + secondsDegree + "deg)";
+			document.getElementsByClassName("seconds")[0].style.transform = secondsRotate;
+		}, 1000);
+		setInterval( function() {
+			var minutes = new Date().getMinutes();
+			var minutesDegree = minutes * 6;
+			var minutesRotate = "rotate(" + minutesDegree + "deg)";
+			document.getElementsByClassName("minutes")[0].style.transform = minutesRotate;
+		}, 1000);
+		setInterval( function() {
+			var hours = new Date().getHours();
+			var minutes = new Date().getMinutes();
+			var seconds = new Date().getSeconds();
+			var hour = (hours < 10) ? "0"+ hours : hours;
+			var minute = (minutes < 10) ? "0" + minutes : minutes;
+			var second = (seconds < 10) ? "0" + seconds : seconds;
+			var hoursDegree = hours * 30 + (minutes/2);
+			var hoursRotate = "rotate(" + hoursDegree + "deg)";
+			document.getElementsByClassName("hour")[0].style.transform = hoursRotate;
+			document.getElementsByClassName("time")[0].innerHTML = hour + ":" + minute + ":" + second;
+		}, 1000);
+	</script>
 </body>
 </html>
