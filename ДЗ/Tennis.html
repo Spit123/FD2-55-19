@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tennis</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			outline: none;
+		}
+		.tennis {
+			width: 800px;
+			height: 600px;
+			margin: 100px auto;
+			position: relative;
+		}
+		.table {
+			background-color: rgb(240, 238, 126);
+			position: relative;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.racket {
+			width: 20px;
+			height: 140px;
+			position: absolute;
+		}
+		.left {
+			top: 50px;
+			left: 0;
+			background-color: rgb(7, 170, 87);
+		}
+		.right {
+			bottom: 50px;
+			right: 0;
+			background-color: rgb(25, 20, 151);
+		}
+		.ball {
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		span {
+			display: block;
+			width: 200px;
+			height: 50px;
+			position: absolute;
+			top: 10px;
+			left: 50%;
+			transform: translate(-50%, 0);
+			line-height: 50px;
+			font-size: 50px;
+			text-align: center;
+		}
+		button {
+			width: 100px;
+			height: 50px;
+			font-weight: bold;
+			font-size: 25px;
+			line-height: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="tennis">
+		<button id="start" onclick="start()">СТАРТ</button>
+		<button onclick="resetScore()">Сброс</button>
+		<span id="score">0 : 0</span>
+		<div class="table">
+			<div class="racket left" id="racketLeft"></div>
+			<div class="racket right" id="racketRight"></div>
+			<img class="ball" id="ball" src="IMages/tennis_ball_small.png" alt="tennis_ball">
+		</div>
+	</div>
+	<script>
+		"use strict"
+
+		var ball = {
+			posX : 400,
+			posY : 250,
+			speedX : 5,
+			speedY : 2,
+			width : 25,
+			height : 25,
+
+			update : function() {
+				var ballElem = document.getElementById("ball");
+				ballElem.style.left = this.posX + "px";
+				ballElem.style.top = this.posY + "px";
+			}
+		}
+
+		var areaTable = {
+			width : 800,
+			height : 500
+		}
+
+		var racketLeft = document.getElementById("racketLeft"),
+			racketRight = document.getElementById("racketRight"), 
+			score = document.getElementById("score"),
+			table = document.getElementsByClassName("table")[0],
+			goal = false,
+			key = [], //для отслеживания кнопок
+			setintervalID, 
+			goalLeft = 0, 
+			goalRight = 0;
+
+		table.style.width = areaTable.width + "px";
+		table.style.height = areaTable.height + "px";
+
+		function getRandomInt(min, max)
+			{
+				return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+
+		function start() {
+			ball.posX = 400;
+			ball.posY = 250;
+			ball.update();
+			//плавное движение - от 25 к/с
+			setintervalID = setInterval(tick, 40);
+		}
+
+		function resetScore() {
+			score.innerHTML = "0 : 0";
+			goal = false;
+			ball.posX = 400;
+			ball.posY = 250;
+			ball.speedX = 6;
+			ball.speedY = 2;
+			ball.update();
+			clearInterval(setintervalID);
+		}
+
+		function tick() {
+			ball.posX += ball.speedX;
+
+			//вылетел ли мяч правее стены?
+			if ( ball.posX + ball.width >= areaTable.width - racketRight.offsetWidth ) {
+				if ( (ball.posY + ball.height) >= racketRight.offsetTop && (ball.posY - ball.height) <= (racketRight.offsetTop + racketRight.offsetHeight)) {
+					ball.speedX =- ball.speedX;
+					ball.speedY =+ ball.speedY;
+				} else if ( ball.posX + ball.width >= areaTable.width ) {
+					goal = true;				
+					goalRight += 1;	
+					clearInterval(setintervalID);
+				}
+
+			}
+			//вылетел ли мяч левее стены?
+			if ( ball.posX < racketLeft.offsetWidth + 25 ) {
+				if ( (ball.posY + ball.height) >= racketLeft.offsetTop && (ball.posY - ball.height) <= (racketLeft.offsetTop + racketLeft.offsetHeight) ) {
+					ball.speedX =- ball.speedX;
+					ball.speedY =+ ball.speedY;
+				} else if ( ball.posX - ball.width <= 0 ) {
+					goal = true;
+					goalLeft += 1;
+					clearInterval(setintervalID);
+				}
+			}
+
+			ball.posY += ball.speedY;
+
+			//вылетел ли мяч ниже пола?
+			if ( ball.posY + ball.height > areaTable.height ) {
+				ball.speedY =- ball.speedY;
+				ball.posY = areaTable.height - ball.height;
+			}
+			//выелетел ли мяч выше потолка?
+			if ( ball.posY < 25 ) {
+				ball.speedY =- ball.speedY;
+				ball.posY = 25;
+			}
+
+			ball.update();
+
+			if (!!goal) {
+				score.innerHTML = goalRight + " : " + goalLeft;
+				goal = false;
+				ball.speedX = getRandomInt(ball.speedX, ball.speedX + getRandomInt(0, 9));
+				ball.speedY = getRandomInt(ball.speedY, ball.speedY + getRandomInt(0, 9));
+			}
+		}
+
+		ball.update();		
+
+		document.onkeydown = function(e) {
+
+			key[e.keyCode] = e.type;
+			//W - левая ракетка вверх
+			if (key[87] && racketLeft.offsetTop !== 0) {
+				racketLeft.style.top = (racketLeft.offsetTop - 10) + "px";
+			}
+			//S - левая ракетка вниз
+			if (key[83] && racketLeft.offsetTop !== (areaTable.height - racketLeft.offsetHeight)) {
+				racketLeft.style.top = (racketLeft.offsetTop + 10) + "px";
+			}
+			//ArrowUp - правая ракетка вверх
+			if (key[38] && racketRight.offsetTop !== 0) {
+				racketRight.style.top = (racketRight.offsetTop - 10) + "px";
+			}
+			//ArrowDown - правая ракетка вниз
+			if (key[40] && racketRight.offsetTop !== (areaTable.height - racketRight.offsetHeight)) {
+				racketRight.style.top = (racketRight.offsetTop + 10) + "px";
+			}
+			//enter - для запуска игры
+			if (key[13]) {
+				start();
+			}
+			//R - сброс
+			if (key[82]) {
+				resetScore();
+			}
+		}
+		
+		document.onkeyup = function(e) {
+			key = [];
+		}
+
+	</script>
+</body>
+</html>

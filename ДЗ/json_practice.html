@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div>
+		<label for="usrname">User Name</label>
+		<input type="text" name="username" id="usrname">
+		<label for="usrage">User Age</label>
+		<input type="text" name="userage" id="usrage">
+		<label for="usremail">User e-mail</label>
+		<input type="text" name="useremail" id="usremail">
+		<button id="btnsave" onclick="saveData()">Save</button>
+	</div>
+	<div>
+		<button id="btnload" onclick="loadData()">Load</button><br>
+		<textarea style="width:250px; height:250px;" id="txtarea"></textarea>
+	</div>
+	<script type="text/javascript">
+		function saveData() {
+
+			var usrName = document.getElementById('usrname').value,
+				usrAge = document.getElementById('usrage').value,
+				usrEmail = document.getElementById('usremail').value,
+				formData = {
+					"User name" : usrName,
+					"Age" : usrAge,
+					"E-mail" : usrEmail
+				},
+				serailObj = JSON.stringify(formData);
+				localStorage.setItem("user1", serailObj);
+
+
+		}
+		function loadData() {
+			var txtArea = document.getElementById('txtarea'),
+				returnObj = JSON.parse(localStorage.getItem("user1"));
+			txtArea.value = "";
+			for (var key in returnObj) {
+				txtArea.value = txtArea.value + key + " " + returnObj[key] + "\n";
+			}
+
+		}
+	</script>
+</body>
+</html>

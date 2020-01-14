@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<canvas id="clock" width="650" height="650"></canvas>
+	<script type="text/javascript">
+		"use strict"
+		/*
+		1. циферблат (круг, отсечки)
+		2. секундная стрелка
+		x=x0+x1
+		y=y0-y1
+		x1 = R *SinA
+		y1 = R*CosA
+		for (i=0; i<12; i++) {
+			A=0
+			a+=30
+			x = x0 + R*SinA
+			y = y0 + R*CosA
+		}*/
+		function ToRadians (angle){
+			return angle * (Math.PI / 180);
+		}
+		function displayCanvas () {
+			var cvs = document.getElementById("clock");
+			var context = cvs.getContext("2d");
+			context.clearRect(0,0,cvs.width,cvs.height);
+			var cx = cvs.width/2,
+				cy = cvs.height/2,
+				angle = 0, 
+				x = 0,
+				y = 0,
+				R = cvs.width/2 - 25;
+
+			context.strokeStyle = "black";
+			context.fillStyle = "yellow";
+			context.beginPath();
+			context.arc(cx,cy,R,0,Math.PI*2,false);
+			context.stroke();
+			context.closePath();
+			context.fill();
+			
+			for (var i = 0; i < 12; i++) {
+				angle += 30;
+				x = cx + (R-40)*Math.sin(ToRadians(angle));
+				y = cy + (R-40)*Math.cos(ToRadians(angle));
+
+				context.strokeStyle = "blue";
+				context.fillStyle = "blue";
+				context.beginPath();
+				context.arc(x,y,20,0,Math.PI*2, false);
+				context.stroke();
+				context.closePath();
+				context.fill();
+			}
+
+			//стрелки
+			var lengthSeconds = R - 50,
+				lengthMinutes = R - 80,
+				lengthHour = lengthMinutes / 1.5,
+				date = new Date(),
+				seconds = 6*date.getSeconds(),
+				minutes = 6*(date.getMinutes() + (1/60)*date.getSeconds()),
+				hour = 30*(date.getHours() + (1/60)*date.getMinutes());
+
+			//Рисование часовой стрелки
+			context.beginPath();	
+			context.strokeStyle = "black";
+			context.lineWidth = 7;
+			context.moveTo(cx, cy);
+			var hx = cx + lengthHour*Math.cos(Math.PI/2 - ToRadians(hour)),
+				hy = cy - lengthHour*Math.sin(Math.PI/2 - ToRadians(hour));
+			context.lineTo(hx, hy);
+			context.stroke();
+			context.closePath();
+
+			//Рисование минутной стрелки
+			context.beginPath();
+			context.strokeStyle = "black";
+			context.lineWidth = 5;
+			context.moveTo(cx, cy);
+			var mx = cx + lengthMinutes*Math.cos(Math.PI/2 - ToRadians(minutes)),
+				my = cy - lengthMinutes*Math.sin(Math.PI/2 - ToRadians(minutes));
+			context.lineTo(mx, my);
+			context.stroke();
+			context.closePath();
+
+			//Рисование секундной стрелки
+			context.beginPath();
+			context.strokeStyle = "red";
+			context.lineWidth = 3;
+			context.moveTo(cx, cy);
+			var sx = cx + (lengthSeconds*Math.cos(Math.PI/2 - ToRadians(seconds))),
+				sy = cy - (lengthSeconds*Math.sin(Math.PI/2 -ToRadians(seconds)));
+			context.lineTo(sx,sy);
+			context.stroke();
+			context.closePath();
+
+			//Рисование центрального круглешка
+			context.beginPath();
+			context.strokeStyle = "black";
+			context.fillStyle = "white";
+			context.lineWidth = 3;
+			context.arc(cx, cy, 5, 0, Math.PI*2, false);
+			context.stroke();
+			context.fill();
+			context.closePath();
+
+			return;
+		}
+
+		setInterval( function() {
+			displayCanvas();
+		}, 1000);
+	</script>
+</body>
+</html>
