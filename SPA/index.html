@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<script src='http://fe.it-academy.by/JQ/jquery.js'></script>
+	</head>
+	<body>
+		<h1>Заголовок</h1>
+		<div>
+			<a href="#about">About</a>
+			<a href="#contacts">Contacts</a>
+		</div>
+		<div id="content">
+
+		</div>
+		<script>
+			window.onhashchange = function() {
+				var URLHash = window.location.hash;
+				console.log(URLHash);
+				loadData(URLHash);
+			};
+
+			function loadData(URLHash) {
+				let url;
+				switch(URLHash) {
+					case "#contacts": 
+						url = "contacts.html";
+						break;
+					case "#about": 
+						url = "about.html";
+						break;
+					default:
+						url = "main.html";
+						break;
+				}
+		        $.ajax(url,
+		            { 
+		            	type:'GET', 
+		            	dataType:'html', 
+		            	success: dataLoaded, 
+		            	error: errorHandler 
+		            }
+		        );
+		    }
+
+		    function dataLoaded(data) {
+		    	document.getElementById('content').innerHTML = data;
+		    	switch(window.location.hash) {
+					case "#contacts": 
+						contactListeners();
+						break;
+					case "#about": 
+						aboutListeners();
+						break;
+				}
+			}
+
+		    function errorHandler() {
+		    	console.log("Error");
+		    }
+
+		    function contactListeners() {
+			    document.getElementById('clickme').addEventListener("click",function() {
+			    	console.log("Clicked");
+			    });
+		    }
+
+		    function aboutListeners() {}
+		</script>
+	</body>
+</html>

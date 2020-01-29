@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>numbers and array</title>
+</head>
+<body>
+	<script>
+		"use strict"
+
+		var numbers = [2, 3, 5, 7, 11, 13, 17];
+
+		function currentSums(array) {
+			let result = [];
+			let arr = [];
+
+			numbers.reduce( function( prev, curr ) {
+				arr.push(curr + "");
+				result.push(prev + curr);
+				return prev + curr;
+			}, 0)
+
+			console.log(result);
+			console.log(arr);
+		}
+
+		currentSums(numbers);
+	</script>
+</body>
+</html>

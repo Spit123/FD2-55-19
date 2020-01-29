@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clock_MVC</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            outline: 0;
+            box-sizing: border-box;
+        }
+        .clockBox {
+            margin: 30px;
+            width: 100px;
+            height: 100px;
+            float: left;
+        }
+        .time {
+            width: 100px;
+            height: 80px;
+            background-color: rgba(0,0,0, 0.1);
+        }
+        </style>
+</head>
+<body>
+    <div class="clockBox" id=block1>
+		<button class="stop">стоп</button>
+		<button class="start"">старт</button>
+		<span>время </span>
+		<div class="time"></div>
+	</div>
+	<div class="clockBox" id=block2>
+		<button class="stop">стоп</button>
+		<button class="start">старт</button>
+		<span>время </span>
+		<div class="time"></div>
+	</div>
+	<div class="clockBox" id=block3>
+		<button class="stop">стоп</button>
+		<button class="start">старт</button>
+		<span>время </span>
+		<div class="time"></div>
+	</div>
+	<div class="clockBox" id=block4>
+		<button class="stop">стоп</button>
+		<button class="start">старт</button>
+		<span>время </span>
+		<div class="time"></div>
+	</div>
+	<div class="clockBox" id=block5>
+		<button class="stop">стоп</button>
+        <button class="start">старт</button>
+		<span>время </span>
+		<div class="time"></div>
+	</div>
+	<div class="clockBox" id=block6>
+		<button class="stop">стоп</button>
+		<button class="start">старт</button>
+		<span>время </span>
+		<div class="time"></div>
+    </div>
+    <script>
+        var setIntervalId = null;
+
+        //model
+        class Model {
+            constructor() {
+                this.time = "00:00:00";
+
+                this.changeTime = function() {
+                    var hours = new Date().getHours(),
+                        minutes = new Date().getMinutes(),
+                        seconds = new Date().getSeconds(),
+                        hour = (hours < 10) ? "0" + hours : hours,
+                        minute = (minute < 10) ? "0" + minutes : minutes,
+                        second = (seconds < 10) ? "0" + seconds : seconds;
+                    this.time = hour + ":" + minute + ":" + second;
+                    this.view.update();
+                }
+                this.init = function(view) {
+                    this.view = view;
+                }
+            }
+        }
+
+        //view
+        class View {
+            constructor() {
+                this.init = function(model, container) {
+                    this.model = model;
+                    this.container = container;
+                }
+
+                this.update = function() {
+                    this.container.getElementsByClassName("time")[0].innerHTML = this.model.time;
+                }
+            }
+        }
+
+        //controller
+        class Controller {
+            constructor() {
+                this.init = (model, container) => {
+                    container.getElementsByClassName("start")[0].addEventListener("click", function() {
+                        setIntervalId = setInterval(function() {
+                            model.changeTime();
+                        }, 1000);
+                    });
+                    container.getElementsByClassName("stop")[0].addEventListener("click", function() {
+                        clearInterval(setIntervalId);
+                    });
+                }
+            }
+        }
+
+        var model1 = new Model();
+        var view1 = new View();
+        var controller1 = new Controller();
+        var container1 = document.getElementById('block1');
+        model1.init(view1);
+        view1.init(model1, container1);
+        controller1.init(model1, container1); 
+
+        var model2 = new Model();
+        var view2 = new View();
+        var controller2 = new Controller();
+        var container2 = document.getElementById('block2');
+        model2.init(view2);
+        view2.init(model2, container2);
+        controller2.init(model2, container2); 
+
+        var model3 = new Model();
+        var view3 = new View();
+        var controller3 = new Controller();
+        var container3 = document.getElementById('block3');
+        model3.init(view3);
+        view3.init(model3, container3);
+        controller3.init(model3, container3); 
+
+        var model4 = new Model();
+        var view4 = new View();
+        var controller4 = new Controller();
+        var container4 = document.getElementById('block4');
+        model4.init(view4);
+        view4.init(model4, container4);
+        controller4.init(model4, container4); 
+
+        var model5 = new Model();
+        var view5 = new View();
+        var controller5 = new Controller();
+        var container5 = document.getElementById('block5');
+        model5.init(view5);
+        view5.init(model5, container5);
+        controller5.init(model5, container5); 
+        
+        var model6 = new Model();
+        var view6 = new View();
+        var controller6 = new Controller();
+        var container6 = document.getElementById('block6');
+        model6.init(view6);
+        view6.init(model6, container6);
+        controller6.init(model6, container6); 
+    </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Andika&display=swap&subset=cyrillic-ext" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/slaid.css">
+    <link rel="stylesheet" href="styles/main.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <section class="head">
+            <header>
+
+                <div class="gallery__image_phone" style="background-image: url('images/phone.png')">
+                    <p class="text_number">Позвоните нам:</p>
+                    <a class="text_number" href="tel:+375297260000">+375 (29) 726-00-00</a>
+                </div>
+
+                <div class="logo" style="background-image: url('images/logo.png')"></div>
+
+                <div class="menu">
+                    <input id="menu__toggle" type="checkbox" />
+
+                    <label class="menu__btn" for="menu__toggle">
+                    <span></span>
+                    </label>
+
+                    <ul class="menu__box">
+                        <li>
+                            <a class="menu__item" href="#"><img src="images/clock.png" alt="" class="gallery__image_clock"> На главную</a>
+                        </li>
+                        <li>
+                            <a class="menu__item" href="#"><img src="images/clock.png" alt="" class="gallery__image_clock"> Наша команда</a>
+                        </li>
+                        <li>
+                            <a class="menu__item" href="#"><img src="images/clock.png" alt="" class="gallery__image_clock"> Наши услуги</a>
+                        </li>
+                        <li>
+                            <a class="menu__item" href="#"><img src="images/clock.png" alt="" class="gallery__image_clock"> Форма обратной связи</a>
+                        </li>
+                        <li>
+                            <a class="menu__item" href="#"><img src="images/clock.png" alt="" class="gallery__image_clock"> Наши контакты</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </header>
+
+            <div class="preview">
+                <h1>Праздник? Проведем!</h1>
+                <p> Настоящее событие трудно представить без ярких моментов, которые в будущем, будут порождать тёплые воспоминания и обогревать душу. Безупречные специалисты и грандиозный поток идей ивент агентства PRO PRAZDNIK станут вашими верными помощниками
+                    в реализации ваших особенных мероприятий.</p>
+
+
+
+                <button class="modal__content" data-id="1">Заказать звонок</button>
+                
+<!-- модальное окно начало
+
+            <div class="call-bgc">
+                <div class="call">
+                    <form method="post" action="#" id="review">
+                        <input class="banner__name" type="text" name="review__nam" required placeholder="Ваше имя" >
+                        <input class="banner__phone" type="text" name="review__nam" required placeholder="Номер телефона">
+                        <input type="submit" value="Заказать звонок" class="review__btn">
+                    </form>
+                </div>
+            </div>
+            
+модальное окно кнец-->
+        </section>
+
+        <section class="content">
+
+            <h2>Наши услуги</h2>
+            <article class="gallery">
+                <a href=""><img src="images/1.png" alt="" class="gallery__image"></a>
+                <a href=""><img src="images/2.png" alt="" class="gallery__image"></a>
+                <a href=""><img src="images/3.png" alt="" class="gallery__image"></a>
+                <a href=""><img src="images/4.png" alt="" class="gallery__image"></a>
+                <a href=""><img src="images/5.png" alt="" class="gallery__image"></a>
+                <a href=""><img src="images/6.png" alt="" class="gallery__image"></a>
+            </article>
+            <h2>Наша команда</h2>
+
+            <!-- СЛАЙДЕР Я ХЗ КАК ЕГО ДЕЛАТЬ -->
+
+            <div id="slider">
+                <div class="slides">
+                    <div class="slider">
+                        <div class="slide-content">
+                            <div class="slide-content-txt">
+                                <h1>Lorem ipsum dolor</h1>
+                                <h2>Nam ultrices pellentesque facilisis. In semper tellus mollis nisl pulvinar vitae vulputate lorem consequat. Fusce odio tortor, pretium sit amet auctor ut, ultrices vel nibh.</h2>
+                            </div>
+                        </div>
+                        <div class="banner">
+                            <img src="img/13.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="slider">
+                        <div class="slide-content">
+                            <div class="slide-content-txt">
+                                <h1>Lorem ipsum dolor</h1>
+                                <h2>Nam ultrices pellentesque facilisis. In semper tellus mollis nisl pulvinar vitae vulputate lorem consequat. Fusce odio tortor, pretium sit amet auctor ut, ultrices vel nibh.</h2>
+                            </div>
+                        </div>
+                        <div class="banner">
+                            <img src="img/14.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="slider">
+                        <div class="slide-content">
+                            <div class="slide-content-txt">
+                                <h1>Lorem ipsum dolor</h1>
+                                <h2>Nam ultrices pellentesque facilisis. In semper tellus mollis nisl pulvinar vitae vulputate lorem consequat. Fusce odio tortor, pretium sit amet auctor ut, ultrices vel nibh.</h2>
+                            </div>
+                        </div>
+                        <div class="banner">
+                            <img src="img/15.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="slider">
+                        <div class="slide-content">
+                            <div class="slide-content-txt">
+                                <h1>Lorem ipsum dolor</h1>
+                                <h2>Nam ultrices pellentesque facilisis. In semper tellus mollis nisl pulvinar vitae vulputate lorem consequat. Fusce odio tortor, pretium sit amet auctor ut, ultrices vel nibh.</h2>
+                            </div>
+                        </div>
+                        <div class="banner">
+                            <img src="img/16.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+
+            <!-- слайдер конец -->
+        
+
+            <h2>Форма обратной связи</h2>
+            <!-- форма обратной связи начало -->
+            <div class="send">
+                <form method="post" action="#" id="review">
+
+                    <input class="banner__name" type="text" name="review__nam" required placeholder="Ваше имя" >
+                    <input class="banner__email" type="text" name="review__nam" required placeholder="Ваш Email">
+                    <input class="banner__phone" type="text" name="review__nam" required placeholder="Номер телефона">
+                    <textarea class="banner__text" name="review__text" required placeholder="Введите текст"></textarea>
+                    <input type="submit" value="Отправить" class="review__btn">
+                    
+                </form>
+            </div>       
+            <!-- форма обратной связи конец-->
+            <h2>Наши контакты</h2>
+            <div class="contacts">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2351.1558880853245!2d27.543312415992236!3d53.89343314129166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbcfe715d49907%3A0x596d4cc90570b560!2z0L_RgNC-0YHQv9C10LrRgiDQndC10LfQsNCy0LjRgdC40LzQvtGB0YLQuCAyLCDQnNC40L3RgdC6!5e0!3m2!1sru!2sby!4v1579949596183!5m2!1sru!2sby"
+                    width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                <p>г.Минск, пр.Независимости, 129 <br> <a class="text_number1" href="tel:+375297260000">+375 (29) 726-00-00</a> <br> с 10.00 до 21.00 ежедневно</p>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    <script src="js/minmax.js"></script>
+    <script src="js/knopka.js"></script>
+</body>
+
+</html>

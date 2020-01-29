@@ -1,0 +1,96 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<div id="block1">
+			<div class="number">0</div>
+			<button class="minus">-</button>
+			<button class="plus">+</button>
+		</div>
+		<div id="block2">
+			<div class="number">0</div>
+			<button class="minus">-</button>
+			<button class="plus">+</button>
+		</div>
+
+		<div id="block3">
+			<div class="number">0</div>
+			<button class="minus">-</button>
+			<button class="plus">+</button>
+		</div>
+		<script>
+			// model
+			class Model {
+				constructor() {
+					this.number = 0;
+
+					this.changeNumber = function(x) {
+						this.number += x;
+						this.view.update();
+					}
+					this.init = function(view) {
+						this.view = view;
+					}
+				}
+			}
+
+			// view
+			class View {
+				constructor() {
+					this.init = function(model, container) {
+						this.model = model;
+						this.container = container;
+					}
+
+					this.update = function() {
+						this.container.getElementsByClassName("number")[0].innerHTML = this.model.number;
+					}
+				}
+
+				
+			}
+
+
+			// controller
+
+			class Controller {
+				constructor() {
+					this.init = (model, container) => {
+						container.getElementsByClassName("minus")[0].addEventListener("click", function() {
+							model.changeNumber(-1);
+						});
+						container.getElementsByClassName("plus")[0].addEventListener("click", function() {
+							model.changeNumber(1);
+						});
+					}
+				}
+
+				
+			}
+
+			var model = new Model();
+			var view = new View();
+			var controller = new Controller();
+			var container = document.getElementById('block1');
+			model.init(view);
+			view.init(model, container);
+			controller.init(model, container);
+
+			var model2 = new Model();
+			var view2 = new View();
+			var controller2 = new Controller();
+			var container2 = document.getElementById('block2');
+			model2.init(view2);
+			view2.init(model2, container2);
+			controller2.init(model2, container2);
+
+			var model3 = new Model();
+			var view3 = new View();
+			var controller3 = new Controller();
+			var container3 = document.getElementById('block3');
+			model3.init(view3);
+			view3.init(model3, container3);
+			controller3.init(model3, container3);
+		</script>
+	</body>
+</html>
