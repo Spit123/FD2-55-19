@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+		}
+		.black {
+			background-color: black;
+		}
+		.white {
+			background-color: white;
+		}
+		.green {
+			background-color: rgb(144, 238, 144);
+		}
+	</style>
+</head>
+<body>
+	<button onclick="createTable()">Построить</button>
+	<table id="table"></table>
+	<script>
+		"use scrict"
+		
+		var table = document.getElementById("table");
+		var tbody = document.createElement("tbody")
+		table.appendChild(tbody);
+		table.style.borderCollapse = "collapse";
+		table.style.marginTop = "20px";
+
+		function createTable() {
+			 for (var i = 0; i<10; i++){
+			 	var tr = document.createElement("tr");
+			 	tbody.appendChild(tr);
+			 	for (var j = 0; j<10; j++) {
+			 		var td = document.createElement("td");
+			 		tr.appendChild(td);
+			 		td.style.border = "1px solid grey";
+			 		td.style.width = td.style.height = "50px";
+			 		if ((!!(i%2) && !(j%2)) || (!(i%2) && !!(j%2))) {
+			 			td.className = "black";
+					 }
+			 	}
+			 }
+			 table.addEventListener("click", function(){
+				var tdArray = document.getElementsByTagName("td");
+				for (var i = 0; i < tdArray.length; i++) {
+					if (tdArray[i].className == "black") {
+						tdArray[i].className = "white";
+					} else if (tdArray[i].className == "white" || !tdArray[i].className) {
+						tdArray[i].className = "black";
+					}
+				}
+			 });
+			 var trArray = document.getElementsByTagName("tr");
+			 for (var i = 0; i < trArray.length; i++) {
+				 if (trArray[i] == tbody.firstChild || trArray[i] == tbody.lastChild) {
+					 for (var j = 0; j < trArray[i].childNodes.length; j++) {
+						 trArray[i].childNodes[j].style.height = "22px";
+						 trArray[i].childNodes[j].className = "green";
+						 trArray[i].firstChild.style.width = "22px";
+		  				 trArray[i].lastChild.style.width = "22px";
+					 }
+					 console.log(trArray[i].childNodes);
+				 } else {
+					trArray[i].firstChild.style.width = "22px";
+					trArray[i].lastChild.style.width = "22px";
+					trArray[i].firstChild.className = "green";
+					trArray[i].lastChild.className = "green";	 
+				 }
+			 }
+		}
+	</script>
+</body>
+</html>
