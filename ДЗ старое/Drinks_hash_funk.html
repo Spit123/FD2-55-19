@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Drink_hash_class</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			outline: none;
+		}
+		body { 
+			background-color: rgb(125, 80, 125);
+			width: 100%;
+			height: 100%;
+		}
+		.btn {
+			width: 150px;
+			height: 80px;
+			padding: 5px;
+			background-color: #FFF;
+			font-size: 20px;
+			margin: 50px;
+			cursor: pointer;
+			border-radius: 20px;
+			border: 1px solid grey;
+			box-shadow: 0 8px 2px grey;
+			position: relative;
+		}
+
+		.btn:hover {
+			top: 3px;
+			box-shadow: 0 5px 2px grey;
+		}
+
+		.btn:active {
+			top: 6px;
+			box-shadow: 0 2px 2px grey;
+		}
+	</style>
+</head>
+<body>
+	<button class="btn" onclick="drinkStorage.addValue()">Ввод информации</button>
+	<button class="btn" onclick="drinkStorage.getValue()">Получение информации</button>
+	<button class="btn" onclick="drinkStorage.getKeys()">Перечень всего</button>
+	<button class="btn" onclick="drinkStorage.deleteValue()">Удаление информации</button>
+
+	<script>
+		"use strict"
+
+		class HashStorageFunc {
+
+			constructor (key, value) {
+				this.key = key;
+				this.value = value;
+				this.data = {};
+			}
+
+			addValue(key, value) {
+				key = prompt("Введите название напитка.");
+				
+				if (!!key) {
+					value = {};
+					var second_value = prompt("Вид напитка?");
+
+					if (second_value) {
+						value["Вид напитка"] = second_value;
+					} else {
+						return;
+					}
+
+					var alc = confirm("Напиток алкогольный?");
+
+					alc ? alc = "да" : alc = "нет";
+					value["Алкогольный"] = alc;
+
+					var recipe = prompt("Введите рецепт");
+
+					if (recipe) {
+						value["Рецепт"] = recipe;
+					} else {
+						return;
+					}
+					this.data[key] = value;
+				} else {
+					console.log("отмена пользователем");
+					return;
+				}
+			}
+
+			getValue(key) {
+				key = prompt("Введите название напитка.");
+
+				if (!!key) {
+					if (key in this.data) {
+	
+							var print_str = "";
+	
+							if (typeof(this.data[key]) == "object") {
+	
+								for (var elem in this.data[key]) {
+	
+									print_str += elem + " : " + this.data[key][elem] + "\n";
+	
+								}
+	
+							} else {
+	
+								print_str += this.data[key];
+	
+							}
+							
+						return console.log("Напиток: " + key + "\n" + print_str);
+	
+					} else {
+	
+						return console.log(":" + this.data[key]);
+	
+					}
+				} else {
+					console.log("Отмена пользователем");
+					return;
+				}
+			}
+			deleteValue(key) {
+				if (!!key) {
+					if (key in this.data) {
+						delete this.data[key];
+						return console.log("Напиток " + key + " успешно удален.");
+					} else {
+						return console.log("Напиток " + key + " не входит в объект.");
+					}
+				} else {
+					console.log("Отмена пользователем");
+					return;
+				}
+			}
+
+			getKeys() {
+				var result = "";
+
+				for (var key in this.data) {
+					result += "\n" + key;
+				}
+
+				return console.log("Напитки:" + result);
+			}
+
+		}
+
+		var drinkStorage = new HashStorageFunc();
+
+	</script>
+</body>
+</html>

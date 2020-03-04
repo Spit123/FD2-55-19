@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Задача 4</title>
+</head>
+<body>
+	<script>
+		function getRandomInt(min, max)
+		{
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+
+		var val = getRandomInt(1, 9999);
+		var data_array = [
+			{
+				0: "ноль",
+				1: "один",
+				2: "два",
+				3: "три",
+				4: "четыре",
+				5: "пять",
+				6: "шесть",
+				7: "семь",
+				8: "восемь",
+				9: "девять",
+				10: "десять",
+				11: "одиннадцать",
+				12: "двенадцать",
+				13: "тринадцать",
+				14: "четырнадцать",
+				15: "пятнадцать",
+				16: "шустнадцать",
+				17: "семнадцать",
+				18: "восемнадцать",
+				19: "девятнадцать"
+			}, 
+			{
+				20: "двадцать",
+				30: "тридцать",
+				40: "сорок",
+				50: "пятьдесят",
+				60: "шестьдесят",
+				70: "семьдесят",
+				80: "восемьдесят",
+				90: "девяноста"
+			},
+			{
+				100: "сто",
+				200: "двести",
+				300: "триста",
+				400: "четыреста",
+				500: "пятьсот",
+				600: "шестьсот",
+				700: "семьсот",
+				800: "восемьсот",
+				900: "девятьсот"
+			}
+		]
+
+		function reduction_units(value) {
+
+			var result = "";
+
+			if (value == 1) {
+				result = " рубль.";
+			} else if ( value > 1 && value < 5 ) {
+				result = " рубля.";
+			} else {
+				result = " рублей.";
+			}
+
+			return result;
+
+		}
+
+		function reduction_thousands(value) {
+
+			var result = "";
+
+			if (value == 1) {
+				result = " тысяча ";
+			} else if ( value > 1 && value < 5 ) {
+				result = " тысячи ";
+			} else {
+				result = " тысяч ";
+			}
+
+			return result;
+		}
+
+		function numberToString(element) {
+
+			val += '';
+			var str = val.split('');
+			var strLength = str.length;
+			var index0 = "",
+				index1 = "",
+				index2 = "",
+				index3 = "";
+
+			switch (strLength) {
+				case 1:
+					var elem = +str[0];
+
+					if (elem in data_array[0]) {
+						index0 = data_array[0][elem];
+					}
+					console.log("Сумма прописью: " + index0 + reduction_units(elem));
+					break;
+				case 2:
+
+					var elem1 = +str[0],
+					 	elem2 = +str[1];
+
+					if (elem1 < 2) {
+
+						elem1 = val;
+						if (elem1 in data_array[0]) {
+							index0 = data_array[0][elem1];
+						}
+
+						console.log("Сумма прописью: " + index0 + reduction_units(elem1));
+
+					} else {
+
+						elem1 *= 10;
+						if (elem1 in data_array[1]) {
+							index0 = data_array[1][elem1];
+						}
+						if (elem2 in data_array[0] && elem2 != 0) {
+							index1 = data_array[0][elem2];
+						}
+
+						console.log("Сумма прописью: " + index0 + " " + index1 + reduction_units(elem2));
+
+					}
+
+					break;
+				case 3:
+					var elem1 = (+str[0])*100,
+						elem2 = +str[1],
+						elem3 = +str[2];
+
+						if (elem1 in data_array[2]) {
+							index0 = data_array[2][elem1];
+						}
+
+						if (elem2 < 2) {
+
+							elem2 = +( str[1] + str[2] );
+							elem3 = 0;
+
+							if (elem2 in data_array[0] && elem2 != 0) {
+								index1 = data_array[0][elem2];
+							}
+
+							console.log("Сумма прописью: " + index0 + " " + index1 + reduction_units(elem2));
+
+						} else {
+
+							elem2 *= 10;
+							
+							if (elem2 in data_array[1]) {
+								index1 = data_array[1][elem2];
+							}
+							if (elem3 in data_array[0] && elem3 != 0) {
+								index2 = data_array[0][elem3];
+							}
+							console.log("Сумма прописью: " + index0 + " " + index1 + " " + index2 + reduction_units(elem3));
+
+						}
+					break;
+				case 4:
+					var elem1 = +str[0],
+						elem2 = (+str[1])*100,
+						elem3 = +str[2],
+						elem4 = +str[3];
+
+					if (elem1 in data_array[0]) {
+						index0 = data_array[0][elem1];
+					}
+
+					if (elem2 in data_array[2]) {
+						index1 = data_array[2][elem2];
+					}
+
+					if (elem3 < 2) {
+						elem3 = +( str[2] + str[3] );
+
+						if (elem3 in data_array[0] && elem3 != 0) {
+							index2 = data_array[0][elem3];
+						}
+						console.log("Сумма прописью: " + index0 + reduction_thousands(elem1) + index1 + " " + index2 + reduction_units(elem3));
+					} else {
+
+						elem3 *= 10;
+						if (elem3 in data_array[1]) {
+							index2 = data_array[1][elem3];
+						}
+						if (elem4 in data_array[0] && elem4 != 0) {
+							index3 = data_array[0][elem4];
+						}
+						console.log("Сумма прописью: " + index0 + reduction_thousands(elem1) + index1 + " " + index2 + " " + index3 + reduction_units(elem4));
+
+					}
+					break;
+				default:
+					alert("Пустая строка");
+					break;
+			}
+		}
+		console.log("Сумма = " + val);
+		console.log(numberToString(val));
+	</script>
+</body>
+</html>

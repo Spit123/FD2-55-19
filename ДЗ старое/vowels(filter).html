@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vowels</title>
+</head>
+<body>
+	<script>
+
+		var vowels = ["А", "а", "О", "о", "У", "у", "Ы", "ы", "Э", "э", "Я", "я", "Е", "е", "Ё", "ё", "Ю", "ю", "И", "и"]; 
+
+		do {
+			do {
+				var str = prompt("Введите строку:"); 
+				
+				if (!!str) {
+					str = str.replace(/[0-9]/g, '') 
+					str = str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+					str = str.replace(/\s{2,}/g," ");
+			  		str = str.trim(); 
+				}
+
+				if (str && str.length < 2) {
+					alert("Строка не может состоять из 1 буквы или быть вовсе пустой!!!");
+				}
+
+			} while (str && str.length < 2)
+		} while (!str)
+
+		var st = str.split('');
+		var res = st.filter(function (element) {
+
+			return vowels.includes(element);
+		
+		});
+
+		console.log("В слове " + str + " содержится " + res.length + " гласных букв.");
+
+	</script>
+</body>
+</html>
